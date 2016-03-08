@@ -6,22 +6,6 @@
 #define MAX_INPUT 255
 #define MAX_KEY 100
 #define MAX_VALUE 154
-/*
-int main(int argc, char** argv)
-{
-	HASHTABLE ht = hashtable_init(1024);
-	hashtable_put("foo", "bar", ht);
-	hashtable_put("baz", "qux", ht);
-	puts(hashtable_getv("foo", ht));
-	puts(hashtable_getv("baz", ht));
-	printf("%d", hashtable_exists("baz", ht));
-	hashtable_remove("baz", ht);
-	printf("%d", hashtable_exists("baz", ht));
-	puts(hashtable_getv("baz", ht));
-	hashtable_deinit(&ht);
-	return 0;
-}
-*/
 
 int process(char* input, HASHTABLE ht)
 {
@@ -59,7 +43,14 @@ int process(char* input, HASHTABLE ht)
 	char *remove;
 	remove = strstr(input, "remove");
 	if(remove == input) {
-		printf("remove command");
+		char *key;
+		key = (char*)malloc(sizeof(char) * MAX_KEY);
+		if(sscanf(input, "remove %s", key) < 1) {
+			return 0;
+		}
+		hashtable_remove(key, ht);
+		printf("Removed: %s\n", key);
+		free(key);
 	}
 }
 
