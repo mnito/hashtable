@@ -3,7 +3,9 @@
 #include <string.h>
 #include "hashtable.h"
 
-#define MAX_INPUT 256
+#define MAX_INPUT 255
+#define MAX_KEY 100
+#define MAX_VALUE 154
 /*
 int main(int argc, char** argv)
 {
@@ -21,14 +23,8 @@ int main(int argc, char** argv)
 }
 */
 
-int main(int argc, char** argv)
+int process(char* input, HASHTABLE ht)
 {
-	HASHTABLE ht = hashtable_init(1024);
-	char input[MAX_INPUT];
-	while(1) {
-		printf(" hashtable>");
-		fgets(input, MAX_INPUT, stdin);
-	}
 	char *quit;
 	quit = strstr(input, "quit");
 	if(quit == input) {
@@ -37,11 +33,45 @@ int main(int argc, char** argv)
 	char *put;
 	put = strstr(input, "put");
 	if(put == input) {
-		printf("put command");
+		char *key;
+		char *value;
+		key = (char*)malloc(sizeof(char) * MAX_KEY);
+		value = (char*)malloc(sizeof(char) * MAX_VALUE);
+		if(sscanf(input, "put %s %[^\n]", key, value) < 2) {
+			return 0;
+		}
+		hashtable_put(key, value, ht);
+		free(key);
+		free(value);
+		puts("Put.");
 	}
 	char *get;
 	get = strstr(input, "get");
 	if(get == input) {
-		printf("get command");
+		char *key;
+		key = (char*)malloc(sizeof(char) * MAX_KEY);
+		if(sscanf(input, "get %s", key) < 1) {
+			return 0;
+		}
+		printf("Got: %s\n", hashtable_getv(key, ht));
+		free(key);
 	}
+	char *remove;
+	remove = strstr(input, "remove");
+	if(remove == input) {
+		printf("remove command");
+	}
+}
+
+int main(int argc, char** argv)
+{
+	HASHTABLE ht = hashtable_init(1024);
+	puts("Simple Hashtable Test");
+	char input[MAX_INPUT];
+	while(1) {
+		printf(" hashtable>");
+		fgets(input, MAX_INPUT, stdin);
+		process(input, ht);
+	}
+
 }
