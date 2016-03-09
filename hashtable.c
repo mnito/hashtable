@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "djb2.h"
+#include "strdup.h"
 #include "hashtable.h"
 
 static HASHTABLE hashtable_fill(int size, HASHTABLE ht)
@@ -15,7 +16,7 @@ static HASHTABLE hashtable_fill(int size, HASHTABLE ht)
 		entry.hash = -1;
 		ht.table[i] = entry;
 	}
-	return ht;	
+	return ht;
 }
 
 HASHTABLE hashtable_init(int size)
@@ -39,9 +40,8 @@ static int hashtable_probe(int ht_key, char *key, HASHTABLE ht)
 	if(strcmp(ht.table[ht_key].key, "") && strcmp(ht.table[ht_key].key, key)) {
 		ht_key = (ht_key + 1) % ht.size;
 		while(strcmp(ht.table[ht_key].key, "")
-		&& strcmp(ht.table[ht_key].key, key)) {
+		&& strcmp(ht.table[ht_key].key, key))
 			ht_key = (ht_key + 1) % ht.size;
-		}
 	}
 	return ht_key;
 }
@@ -62,7 +62,7 @@ bool hashtable_exists(char *key, HASHTABLE ht)
 
 bool hashtable_put(char *key, char *value, HASHTABLE ht)
 {
-	if(*(ht.count) >= ht.size -1) return 0;
+	if(*(ht.count) >= ht.size - 1) return 0;
 	HASHTABLE_ENTRY entry;
 	unsigned long hash;
 	int ht_key;
@@ -84,9 +84,7 @@ char *hashtable_getv(char *key, HASHTABLE ht)
 bool hashtable_remove(char *key, HASHTABLE ht)
 {
 	HASHTABLE_ENTRY entry = hashtable_get(key, ht);
-	if(entry.hash == -1) {
-		return 0;
-	}
+	if(entry.hash == -1) return 0;
 	int hash = entry.hash;
 	entry.hash = -1;
 	entry.value = "";
@@ -109,9 +107,7 @@ void hashtable_print(HASHTABLE ht, bool all)
 	for(i = 0; i < ht.size; i++) {
 		HASHTABLE_ENTRY entry = ht.table[i];
 		if(all < 1) {
-		     	if(entry.hash == -1) {
-				continue;
-			}
+		     	if(entry.hash == -1) continue;
 		}
 		printf("%d : %s : %s\n", entry.hash, entry.key, entry.value);
 	}

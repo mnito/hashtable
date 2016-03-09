@@ -1,22 +1,19 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-struct Hashtable_Entry
+typedef struct Hashtable_Entry
 {
 	char *key;
 	char *value;
 	int hash;
-};
+} HASHTABLE_ENTRY;
 
-struct Hashtable
+typedef struct
 {
 	int size;
 	int *count;
 	struct Hashtable_Entry *table;
-};
-
-typedef struct Hashtable_Entry HASHTABLE_ENTRY;
-typedef struct Hashtable HASHTABLE;
+} HASHTABLE;
 
 HASHTABLE hashtable_init(int size);
 
@@ -35,7 +32,5 @@ _Bool hashtable_remove(char *key, HASHTABLE ht);
 void hashtable_deinit(HASHTABLE *ht);
 
 void hashtable_print(HASHTABLE ht, _Bool all);
-
-char *strdup(const char *str);
 
 #endif

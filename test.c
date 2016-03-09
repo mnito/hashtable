@@ -72,7 +72,6 @@ static bool print(char *input, HASHTABLE ht)
 {
 	char *all = (char*)malloc(sizeof(char) * 4);
 	if(sscanf(input, "print %s", all) >= 1) {
-	puts("Here");
 			hashtable_print(ht, 1);
 			return 1;
 		
