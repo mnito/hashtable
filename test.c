@@ -18,6 +18,7 @@ int process(char* input, HASHTABLE ht)
 	char *quit;
 	quit = strstr(input, "quit");
 	if(quit == input) {
+                hashtable_deinit(&ht);
 		exit(0);
 	}
 	char *put;
