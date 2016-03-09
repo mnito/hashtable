@@ -25,7 +25,7 @@ HASHTABLE hashtable_init(int size)
 
 unsigned long hashtable_hash(char *str)
 {
-	return djb2(str);
+	return djb2((unsigned char*)str);
 }
 
 int hashtable_probe(int ht_key, char *key, HASHTABLE ht)
@@ -89,6 +89,7 @@ bool hashtable_remove(char *key, HASHTABLE ht)
 	entry.value = "";
 	entry.key = "";
 	ht.table[hash] = entry;
+        return 1;
 }
 
 void hashtable_deinit(HASHTABLE *ht)

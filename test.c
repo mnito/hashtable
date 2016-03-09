@@ -7,6 +7,12 @@
 #define MAX_KEY 100
 #define MAX_VALUE 154
 
+int haspre(char *prefix, char *str)
+{
+    char *test = strstr(str, prefix);
+    return test == str;
+}
+
 int process(char* input, HASHTABLE ht)
 {
 	char *quit;
@@ -37,7 +43,12 @@ int process(char* input, HASHTABLE ht)
 		if(sscanf(input, "get %s", key) < 1) {
 			return 0;
 		}
-		printf("Got: %s\n", hashtable_getv(key, ht));
+		char *value = hashtable_getv(key, ht);
+		if(strcmp(value, "") == 0) {
+			puts("Entry does not exist.");
+		} else {
+                        printf("Got: %s\n", value);
+		}
 		free(key);
 	}
 	char *remove;
@@ -52,9 +63,10 @@ int process(char* input, HASHTABLE ht)
 		printf("Removed: %s\n", key);
 		free(key);
 	}
+        return 1;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 	HASHTABLE ht = hashtable_init(1024);
 	puts("Simple Hashtable Test");
@@ -64,5 +76,5 @@ int main(int argc, char** argv)
 		fgets(input, MAX_INPUT, stdin);
 		process(input, ht);
 	}
-
+        return 0;
 }
