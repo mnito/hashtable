@@ -12,7 +12,7 @@ typedef struct
 {
 	int size;
 	int *count;
-	struct Hashtable_Entry *table;
+    struct Hashtable_Entry *table;
 } HASHTABLE;
 
 HASHTABLE hashtable_init(int size);
