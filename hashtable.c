@@ -122,6 +122,6 @@ void hashtable_resize(int size, HASHTABLE *ht)
          if(entry.hash == -1) continue;
          hashtable_put(entry.key, entry.value, new);
     }
-    ht->size = new.size;
-    ht->table = new.table;
+    hashtable_deinit(ht);
+    *ht = new;
 }
