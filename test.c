@@ -74,7 +74,7 @@ static bool print(char *input, HASHTABLE ht)
 	if(sscanf(input, "print %s", all) >= 1) {
 			hashtable_print(ht, 1);
 			return 1;
-		
+
 	}
 	hashtable_print(ht, 0);
 	return 1;
@@ -105,10 +105,15 @@ bool process(char *input, HASHTABLE ht)
 		return get(input, ht);
 	}
 	if(command("remove", input)) {
-		return _remove(input, ht);		
+		return _remove(input, ht);
 	}
 	if(command("print", input)) {
 		return print(input, ht);
+	}
+    if(command("resize", input)) {
+        hashtable_resize(20, &ht);
+        puts("Resized");
+        return 1;
 	}
         return 0;
 }

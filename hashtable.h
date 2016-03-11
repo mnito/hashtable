@@ -33,4 +33,6 @@ void hashtable_deinit(HASHTABLE *ht);
 
 void hashtable_print(HASHTABLE ht, _Bool all);
 
+void hashtable_resize(int size, HASHTABLE *ht);
+
 #endif

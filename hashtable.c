@@ -112,3 +112,16 @@ void hashtable_print(HASHTABLE ht, bool all)
         printf("%d : %s : %s\n", entry.hash, entry.key, entry.value);
     }
 }
+
+void hashtable_resize(int size, HASHTABLE *ht)
+{
+    HASHTABLE new = hashtable_init(size);
+    int i;
+    for(i = 0; i < ht->size; i++) {
+        HASHTABLE_ENTRY entry = ht->table[i];
+         if(entry.hash == -1) continue;
+         hashtable_put(entry.key, entry.value, new);
+    }
+    ht->size = new.size;
+    ht->table = new.table;
+}
