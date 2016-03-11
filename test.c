@@ -6,10 +6,16 @@
 #include "hashtable.h"
 
 #define MIN_TABLE_SIZE 2
-#define MAX_TABLE_SIZE 100000
 #define MAX_INPUT 255
 #define MAX_KEY 100
 #define MAX_VALUE 154
+
+static void header()
+{
+    puts("---------------------------------------------------------");
+    puts("| Hashtable Implementation (c) 2016 Michael P. Nitowski |");
+    puts("---------------------------------------------------------");
+}
 
 static bool haspre(char *prefix, char *str)
 {
@@ -24,6 +30,7 @@ static bool command(char *command, char *data)
 
 static bool put(char *input, HASHTABLE ht)
 {
+        bool ret = 1;
  		char *key;
 		char *value;
 		key = (char*)malloc(sizeof(char) * MAX_KEY);
@@ -31,10 +38,10 @@ static bool put(char *input, HASHTABLE ht)
 		if(sscanf(input, "put %s %[^\n]", key, value) < 2) {
 			return 0;
 		}
-		hashtable_put(key, value, ht);
+		ret = hashtable_put(key, value, ht);
+        if (ret) puts("Put."); else puts("Cannot add anymore elements.");
 		free(key);
 		free(value);
-		puts("Put.");
 		return 1;
 }
 
@@ -70,7 +77,7 @@ static bool _remove(char *input, HASHTABLE ht)
 
 static bool print(char *input, HASHTABLE ht)
 {
-    _Bool b;
+    bool b;
 	char *all = (char*)malloc(sizeof(char) * 4);
 	if(sscanf(input, "print %s", all) >= 1) {
 		b = 1;
@@ -91,14 +98,38 @@ static bool resize(char *input, HASHTABLE *ht)
 	} else {
         size = ht->size * 2;
     }
-    if(size < MIN_TABLE_SIZE || size > MAX_TABLE_SIZE) {
-		printf("Hashtable size must be between %d and %d.\n", MIN_TABLE_SIZE, MAX_TABLE_SIZE);
+    if(size < MIN_TABLE_SIZE) {
 		return 0;
 	}
     hashtable_resize(size, ht);
     printf("Hashtable resized to %d.\n", ht->size);
     free(ssize);
 	return 1;
+}
+
+static void stats(char *input, HASHTABLE ht)
+{
+    printf("Count: %d\nSize: %d\n", *ht.count, ht.size);
+}
+
+static void help()
+{
+    puts("Commands:");
+    puts("put <key> <value>");
+    puts("get <key>");
+    puts("remove <key>");
+    puts("print");
+    puts("print all");
+    puts("resize");
+    printf("resize <size>");
+    puts("help");
+    puts("quit");
+}
+
+static void info()
+{
+    puts("Maximum fill size is (size - 1) elements in this implementation.");
+    puts("Hence, minimum usable table size is 2.");
 }
 
 bool process(char *input, HASHTABLE *ht)
@@ -108,37 +139,22 @@ bool process(char *input, HASHTABLE *ht)
 		exit(0);
 		return 1;
 	}
-	if(command("help", input)) {
-		puts("Commands:");
-		puts("put <key> <value>");
-		puts("get <key>");
-		puts("remove <key>");
-		puts("print");
-		puts("print all");
-		puts("help");
-		puts("quit");
+	if(command("put", input)) return put(input, *ht);
+	if(command("get", input)) return get(input, *ht);
+	if(command("remove", input)) return _remove(input, *ht);
+	if(command("print", input)) return print(input, *ht);
+    if(command("resize", input)) return resize(input, ht);
+    if(command("stat", input)) {
+        stats(input, *ht);
+        return 1;
+    }
+    if(command("help", input)) {
+        help();
 		return 1;
 	}
-	if(command("put", input)) {
-		return put(input, *ht);
-	}
-	if(command("get", input)) {
-		return get(input, *ht);
-	}
-	if(command("remove", input)) {
-		return _remove(input, *ht);
-	}
-	if(command("print", input)) {
-		return print(input, *ht);
-	}
-    if(command("resize", input)) {
-        return resize(input, ht);
-        /*
-        hashtable_resize(20, ht);
-        hashtable_print(*ht, 1);
-        puts("Resized");
-        return 1;
-        */
+    if(command("info", input)) {
+        info();
+		return 1;
 	}
     return 0;
 }
@@ -147,16 +163,16 @@ int main(int argc, char **argv)
 {
 	long int size;
 	if(argc < 2 ) {
-		puts("Usage: hashtable_cli <int>");
+		puts("Usage: htcli <size>");
 		return 0;
 	}
 	size = strtol(argv[1], NULL, 10);
-	if(size < MIN_TABLE_SIZE || size > MAX_TABLE_SIZE) {
-		printf("Hashtable size must be between %d and %d.\n", MIN_TABLE_SIZE, MAX_TABLE_SIZE);
+	if(size < MIN_TABLE_SIZE) {
+		printf("Hashtable size must be greater than %d.\n", MIN_TABLE_SIZE);
 		return 0;
 	}
 	HASHTABLE ht = hashtable_init(size);
-	puts("Simple Hashtable Test");
+	header();
 	char input[MAX_INPUT];
 	while(1) {
 		printf(" hashtable>");

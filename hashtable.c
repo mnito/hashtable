@@ -1,8 +1,14 @@
+/*****************************************************
+* Hashtable Implementation                           *
+* Author: Michael P. Nitowski <mpnitowski@gmail.com> *     *
+* License: MIT License                               *
+******************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "djb2.h"
+#include "hash.h"
 #include "strdup.h"
 #include "hashtable.h"
 
@@ -29,10 +35,9 @@ HASHTABLE hashtable_init(int size)
     return hashtable_fill(size, ht);
 }
 
-
 unsigned long hashtable_hash(char *str)
 {
-    return djb2((unsigned char*)str);
+    return hash((unsigned char*)str);
 }
 
 static int hashtable_probe(int ht_key, char *key, HASHTABLE ht)
