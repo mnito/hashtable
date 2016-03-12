@@ -103,14 +103,14 @@ static bool resize(char *input, HASHTABLE *ht)
         return 0;
     }
     hashtable_resize(size, ht);
-    printf("Hashtable resized to %d.\n", ht->size);
+    printf("Hashtable resized to %d.\n", (int) ht->size);
     free(ssize);
     return 1;
 }
 
 static void stats(char *input, HASHTABLE ht)
 {
-    printf("Count: %d\nSize: %d\n", *ht.count, ht.size);
+    printf("Count: %d\nSize: %d\n", *ht.count, (int) ht.size);
 }
 
 static void help()
