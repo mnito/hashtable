@@ -31,7 +31,7 @@ gcc -O3 -std=c99 -Wall -o htcli *.c
 For clang:
 
 ```cmd
-clang -O3 -std=c99 -Wall -o htcli2.exe *.c
+clang -O3 -std=c99 -Wall -o htcli *.c
 ```
 
 This implementation uses strdup (included as a header). 
