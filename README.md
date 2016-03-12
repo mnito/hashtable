@@ -1,8 +1,8 @@
 # Hash Table Module in C
 
-## Description
+## Notes
 
-I started this project as a component of another project, but then this became of project of its own.
+A hash table implementation.
 
 There is also a command line interface to the module.
 
