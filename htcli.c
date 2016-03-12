@@ -18,7 +18,7 @@
 static void header()
 {
     puts("---------------------------------------------------------");
-    puts("| Hashtable Implementation (c) 2016 Michael P. Nitowski |");
+    puts("| Hash Table Implementation (c) 2016 Michael P. Nitowski |");
     puts("---------------------------------------------------------");
 }
 
