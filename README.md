@@ -6,7 +6,6 @@ A hash table implementation.
 
 There is also a command line interface to the module.
 
-
 ## Author
 
 Michael P. Nitowski <[mpnitowski@gmail.com](mailto:mpnitowski@gmail.com)> 
@@ -36,7 +35,7 @@ clang -O3 -std=c99 -pedantic -Wall -o htcli *.c
 
 This implementation uses strdup (included as a header). 
 This function is not a standard C function, but compilers may make it 
-available. If there is a conflict in standard compilation try using 
+available. If there is a conflict in standard compilation, try using 
 -std=c99 -pedantic -Wall flags.
 
 The header file can cause a conflict if strdup is perceived
