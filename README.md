@@ -22,13 +22,13 @@ To compile the command line client:
 
 Navigate to the folder using the command line and:
 
-For gcc:
+For GCC:
 
 ```cmd
 gcc -O3 -std=c99 -Wall -o htcli *.c
 ```
 
-For clang:
+For Clang:
 
 ```cmd
 clang -O3 -std=c99 -Wall -o htcli *.c
