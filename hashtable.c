@@ -1,5 +1,5 @@
 /*****************************************************
-* Hash Table Implementation                           *
+* Hash Table Implementation                          *
 * Author: Michael P. Nitowski <mpnitowski@gmail.com> *
 * License: MIT License                               *
 ******************************************************/
