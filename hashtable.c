@@ -12,7 +12,7 @@
 #include "strdup.h"
 #include "hashtable.h"
 
-static HASHTABLE hashtable_fill(int size, HASHTABLE ht)
+static HASHTABLE hashtable_fill(size_t size, HASHTABLE ht)
 {
     int i;
     for(i = 0; i < size; i++) {
@@ -25,7 +25,7 @@ static HASHTABLE hashtable_fill(int size, HASHTABLE ht)
     return ht;
 }
 
-HASHTABLE hashtable_init(int size)
+HASHTABLE hashtable_init(size_t size)
 {
     HASHTABLE ht;
     ht.size = size;
@@ -118,7 +118,7 @@ void hashtable_print(HASHTABLE ht, bool all)
     }
 }
 
-void hashtable_resize(int size, HASHTABLE *ht)
+void hashtable_resize(size_t size, HASHTABLE *ht)
 {
     HASHTABLE new = hashtable_init(size);
     int i;

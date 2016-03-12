@@ -172,7 +172,7 @@ int main(int argc, char **argv)
         printf("Hashtable size must be greater than %d.\n", MIN_TABLE_SIZE);
         return 0;
     }
-    HASHTABLE ht = hashtable_init(size);
+    HASHTABLE ht = hashtable_init((size_t) size);
     header();
     char input[MAX_INPUT];
     while(1) {

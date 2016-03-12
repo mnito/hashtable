@@ -10,12 +10,12 @@ typedef struct Hashtable_Entry
 
 typedef struct
 {
-    int size;
+    size_t size;
     int *count;
     struct Hashtable_Entry *table;
 } HASHTABLE;
 
-HASHTABLE hashtable_init(int size);
+HASHTABLE hashtable_init(size_t size);
 
 unsigned long hashtable_hash(char *str);
 
@@ -33,6 +33,6 @@ void hashtable_deinit(HASHTABLE *ht);
 
 void hashtable_print(HASHTABLE ht, _Bool all);
 
-void hashtable_resize(int size, HASHTABLE *ht);
+void hashtable_resize(size_t size, HASHTABLE *ht);
 
 #endif
