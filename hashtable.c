@@ -1,6 +1,6 @@
 /*****************************************************
-* Hashtable Implementation                           *
-* Author: Michael P. Nitowski <mpnitowski@gmail.com> *     *
+* Hash Table Implementation                           *
+* Author: Michael P. Nitowski <mpnitowski@gmail.com> *
 * License: MIT License                               *
 ******************************************************/
 
@@ -95,7 +95,7 @@ bool hashtable_remove(char *key, HASHTABLE ht)
     entry.value = "";
     entry.key = "";
     ht.table[hash] = entry;
-        return 1;
+    return 1;
 }
 
 void hashtable_deinit(HASHTABLE *ht)
@@ -112,7 +112,7 @@ void hashtable_print(HASHTABLE ht, bool all)
     for(i = 0; i < ht.size; i++) {
         HASHTABLE_ENTRY entry = ht.table[i];
         if(all < 1) {
-                 if(entry.hash == -1) continue;
+            if(entry.hash == -1) continue;
         }
         printf("%d : %s : %s\n", entry.hash, entry.key, entry.value);
     }
@@ -124,8 +124,8 @@ void hashtable_resize(int size, HASHTABLE *ht)
     int i;
     for(i = 0; i < ht->size; i++) {
         HASHTABLE_ENTRY entry = ht->table[i];
-         if(entry.hash == -1) continue;
-         hashtable_put(entry.key, entry.value, new);
+        if(entry.hash == -1) continue;
+        hashtable_put(entry.key, entry.value, new);
     }
     hashtable_deinit(ht);
     *ht = new;

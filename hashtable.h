@@ -3,15 +3,15 @@
 
 typedef struct Hashtable_Entry
 {
-	char *key;
-	char *value;
-	int hash;
+    char *key;
+    char *value;
+    int hash;
 } HASHTABLE_ENTRY;
 
 typedef struct
 {
-	int size;
-	int *count;
+    int size;
+    int *count;
     struct Hashtable_Entry *table;
 } HASHTABLE;
 
