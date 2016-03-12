@@ -16,7 +16,7 @@ Michael P. Nitowski <[mpnitowski@gmail.com](mailto:mpnitowski@gmail.com)>
 
 The MIT License
 
-## Note
+## Notes
 
 To compile the command line client:
 
