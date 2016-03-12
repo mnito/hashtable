@@ -25,13 +25,13 @@ Navigate to the folder using the command line and:
 For GCC:
 
 ```cmd
-gcc -O3 -std=c99 -Wall -o htcli *.c
+gcc -O3 -std=c99 -pedantic -Wall -o htcli *.c
 ```
 
 For Clang:
 
 ```cmd
-clang -O3 -std=c99 -Wall -o htcli *.c
+clang -O3 -std=c99 -pedantic -Wall -o htcli *.c
 ```
 
 This implementation uses strdup (included as a header). 
