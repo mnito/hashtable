@@ -122,7 +122,7 @@ static void help()
     puts("print");
     puts("print all");
     puts("resize");
-    printf("resize <size>");
+    puts("resize <size>");
     puts("help");
     puts("quit");
 }
